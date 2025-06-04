@@ -89,6 +89,40 @@
             bottom: 20px;
             left: 20px;
         }
+
+                body {
+            margin: 0;
+            overflow: hidden;
+            background: #222;
+            height: 100vh;
+            position: relative;
+        }
+
+        .emoji {
+            position: fixed;
+            font-size: 30px;
+            user-select: none;
+            pointer-events: none;
+            animation-name: fallFade;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fallFade {
+            0% {
+                transform: translateY(-50px);
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -220,6 +254,25 @@
             // Faz a página rolar pro topo da galeria
             document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
         }
+
+        const emojis = ['💜'];
+
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = (4 + Math.random() * 3) + 's'; // 4 a 7 segundos
+            document.body.appendChild(emoji);
+
+            // Remove o emoji depois que a animação terminar pra não ficar no DOM
+            emoji.addEventListener('animationend', () => {
+                emoji.remove();
+            });
+        }
+
+        // Cria um emoji a cada 300ms
+        setInterval(createEmoji, 1000 / 4);
 
     </script>
 
