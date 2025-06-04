@@ -196,31 +196,33 @@
         Feito com amor pelo seu amorzinho 🖤
     </footer>
 
-    <audio controls autoplay loop>
-        <source src="./white-ferrari.mp3" type="audio/mpeg">
-        Seu navegadoñ suporta áudio.
-    </audio>
+    <audio controls loop>
+    <source src="./white-ferrari.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+</audio>
 
     <script>
-        function abrirCarta() {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('carta').style.display = 'block';
-            const audio = document.querySelector('audio');
-            audio.play();
-            // Faz a página rolar pro topo da carta
-            document.getElementById('carta').scrollIntoView({ behavior: 'smooth' });
-        }
+    const audio = document.querySelector('audio');
 
-        function voltarGaleria() {
-            document.getElementById('carta').style.display = 'none';
-            document.getElementById('home').style.display = 'block';
-            const audio = document.querySelector('audio');
-            audio.play();
-            // Faz a página rolar pro topo da galeria
-            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-        }
+    window.addEventListener('click', () => {
+        audio.play().catch(() => {});
+    }, { once: true });
 
-    </script>
+    function abrirCarta() {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('carta').style.display = 'block';
+        audio.play();
+        document.getElementById('carta').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function voltarGaleria() {
+        document.getElementById('carta').style.display = 'none';
+        document.getElementById('home').style.display = 'block';
+        audio.play();
+        document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+    }
+        
+</script>
 
 </body>
 
